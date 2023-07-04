@@ -85,3 +85,12 @@ Route::get("/teacher/component", function () {
 Route::get("/student/component", function () {
     return view("student-component");
 });
+
+Route::get('/tables', function () {
+    return view('tables');
+});
+
+Route::get("/tables/inheritance", function () {
+    return view("tables-inheritance");
+});
+
