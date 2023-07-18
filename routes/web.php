@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Covid19Controller;
 use App\Http\Controllers\MyProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -95,10 +96,14 @@ Route::get("/tables/inheritance", function () {
     return view("tables-inheritance");
 });
 
-Route::get("/myprofile/create",[ MyProfileController::class , "create" ]);
-Route::get("/myprofile/{id}/edit", [ MyProfileController::class , "edit" ] );
-Route::get( "/coronavirus" ,[ MyProfileController::class , "coronavirus" ] );
+Route::get("/myprofile/create", [MyProfileController::class, "create"]);
+Route::get("/myprofile/{id}/edit", [MyProfileController::class, "edit"]);
+Route::get("/coronavirus", [MyProfileController::class, "coronavirus"]);
 
-Route::get( "/newgallery" , [ MyProfileController::class , "gallery" ] );
-Route::get( "/newgallery/ant" , [ MyProfileController::class , "ant" ] );
-Route::get( "/newgallery/bird" , [ MyProfileController::class , "bird" ] );
+Route::get("/newgallery", [MyProfileController::class, "gallery"]);
+Route::get("/newgallery/ant", [MyProfileController::class, "ant"]);
+Route::get("/newgallery/bird", [MyProfileController::class, "bird"]);
+
+Route::get('/covid19', [ Covid19Controller::class,"index" ]);
+
+
