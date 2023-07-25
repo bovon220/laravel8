@@ -3,6 +3,9 @@
 use App\Http\Controllers\Covid19Controller;
 use App\Http\Controllers\MyProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\StaffController;
+use App\Models\Staff;
 
 /*
 |--------------------------------------------------------------------------
@@ -104,6 +107,20 @@ Route::get("/newgallery", [MyProfileController::class, "gallery"]);
 Route::get("/newgallery/ant", [MyProfileController::class, "ant"]);
 Route::get("/newgallery/bird", [MyProfileController::class, "bird"]);
 
-Route::get('/covid19', [ Covid19Controller::class,"index" ]);
+Route::get('/covid19', [Covid19Controller::class, "index"]);
 
+Route::get("/product", [ProductController::class, "index"])->name('product.index');
+Route::get("/product/create", [ProductController::class, "create"])->name('product.create');
+Route::post("/product", [ProductController::class, "store"])->name('product.store');
+Route::get('/product/{id}', [ProductController::class, "show"])->name('product.show');
+Route::get("/product/{id}/edit", [ProductController::class, "edit"])->name('product.edit');
+Route::patch("/product/{id}", [ProductController::class, "update"])->name('product.update');
+Route::delete("/product/{id}", [ProductController::class, "destroy"])->name('product.destroy');
 
+//Route::get("staff",[StaffController::class,"index"])->name('staff.index');
+//Route::get("staff/create",[StaffController::class,"create"])->name('staff.create');
+//Route::get("staff/edit",[StaffController::class,"edit"])->name('staff.edit');
+//Route::get("staff/show",[StaffController::class,"show"])->name('staff.show');
+//Route::delete("/staff/{id}", [ProductController::class, "destroy"])->name('staff.destroy');
+
+Route::resource('/staff', StaffController::class );
