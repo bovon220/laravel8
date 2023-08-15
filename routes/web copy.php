@@ -63,14 +63,12 @@ Route::get("/gallery/cat", function () {
     return view("test/cat", compact("cat"));
 });
 
-Route::middleware(['auth', 'role:admin,teacher'])->group(function () {
 Route::get("/teacher", function () {
     return view("teacher");
 });
 
 Route::get("/student", function () {
     return view("student");
-});
 });
 
 Route::get("/theme", function () {
@@ -86,12 +84,9 @@ Route::get("/student/inheritance", function () {
 });
 
 // Route Template Component
-
 Route::get("/teacher/component", function () {
     return view("teacher-component");
 });
-
-
 Route::get("/student/component", function () {
     return view("student-component");
 });
@@ -128,11 +123,4 @@ Route::delete("/product/{id}", [ProductController::class, "destroy"])->name('pro
 //Route::get("staff/show",[StaffController::class,"show"])->name('staff.show');
 //Route::delete("/staff/{id}", [ProductController::class, "destroy"])->name('staff.destroy');
 
-Route::resource('/product', ProductController::class );
 Route::resource('/staff', StaffController::class );
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
-
-require __DIR__ . '/auth.php';
