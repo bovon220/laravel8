@@ -7,6 +7,8 @@
     <title>{{ $title }}</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <!-- Fontawesome -->
+    <link type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.css" rel="stylesheet" />
 </head>
 
 <body>
@@ -43,10 +45,25 @@
                     <li class="nav-item">
                         <a class="nav-link disabled">Disabled</a>
                     </li>
+                    @if (Route::has('login'))
+                    @auth
+                    <li class="nav-item">
+                        <a href="{{ url('/dashboard') }}" class="nav-link">Dashboard</a>
+                    </li>
+                    @else
+                    <li class="nav-item">
+                        <a href="{{ route('login') }}" class="nav-link">Log in</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('register') }}" class="nav-link">Register</a>
+                    </li>
+                    @endauth
+                    @endif
                 </ul>
                 <form class="d-flex" role="search">
                     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                     <button class="btn btn-outline-success" type="submit">Search</button>
+
                 </form>
             </div>
         </div>
