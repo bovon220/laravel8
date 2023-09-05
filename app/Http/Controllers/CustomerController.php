@@ -5,10 +5,10 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Http\Requests;
 
-use App\Models\Vehicle;
+use App\Models\Customer;
 use Illuminate\Http\Request;
 
-class VehicleController extends Controller
+class CustomerController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -21,17 +21,19 @@ class VehicleController extends Controller
         $perPage = 25;
 
         if (!empty($keyword)) {
-            $vehicle = Vehicle::where('no', 'LIKE', "%$keyword%")
-                ->orWhere('Brand', 'LIKE', "%$keyword%")
-                ->orWhere('Serie', 'LIKE', "%$keyword%")
-                ->orWhere('Color', 'LIKE', "%$keyword%")
-                ->orWhere('mileage', 'LIKE', "%$keyword%")
+            $customer = Customer::where('name', 'LIKE', "%$keyword%")
+                ->orWhere('organization_name', 'LIKE', "%$keyword%")
+                ->orWhere('address', 'LIKE', "%$keyword%")
+                ->orWhere('phone', 'LIKE', "%$keyword%")
+                ->orWhere('email', 'LIKE', "%$keyword%")
+                ->orWhere('remark', 'LIKE', "%$keyword%")
+                ->orWhere('user_id', 'LIKE', "%$keyword%")
                 ->latest()->paginate($perPage);
         } else {
-            $vehicle = Vehicle::latest()->paginate($perPage);
+            $customer = Customer::latest()->paginate($perPage);
         }
 
-        return view('vehicle.index', compact('vehicle'));
+        return view('customer.index', compact('customer'));
     }
 
     /**
@@ -41,7 +43,7 @@ class VehicleController extends Controller
      */
     public function create()
     {
-        return view('vehicle.create');
+        return view('customer.create');
     }
 
     /**
@@ -56,10 +58,9 @@ class VehicleController extends Controller
         
         $requestData = $request->all();
         
-        Vehicle::create($requestData);
-        // return $requestData;
+        Customer::create($requestData);
 
-        return redirect('vehicle')->with('flash_message', 'Vehicle added!');
+        return redirect('customer')->with('flash_message', 'Customer added!');
     }
 
     /**
@@ -71,9 +72,9 @@ class VehicleController extends Controller
      */
     public function show($id)
     {
-        $vehicle = Vehicle::findOrFail($id);
+        $customer = Customer::findOrFail($id);
 
-        return view('vehicle.show', compact('vehicle'));
+        return view('customer.show', compact('customer'));
     }
 
     /**
@@ -85,9 +86,9 @@ class VehicleController extends Controller
      */
     public function edit($id)
     {
-        $vehicle = Vehicle::findOrFail($id);
+        $customer = Customer::findOrFail($id);
 
-        return view('vehicle.edit', compact('vehicle'));
+        return view('customer.edit', compact('customer'));
     }
 
     /**
@@ -103,10 +104,10 @@ class VehicleController extends Controller
         
         $requestData = $request->all();
         
-        $vehicle = Vehicle::findOrFail($id);
-        $vehicle->update($requestData);
+        $customer = Customer::findOrFail($id);
+        $customer->update($requestData);
 
-        return redirect('vehicle')->with('flash_message', 'Vehicle updated!');
+        return redirect('customer')->with('flash_message', 'Customer updated!');
     }
 
     /**
@@ -118,8 +119,8 @@ class VehicleController extends Controller
      */
     public function destroy($id)
     {
-        Vehicle::destroy($id);
+        Customer::destroy($id);
 
-        return redirect('vehicle')->with('flash_message', 'Vehicle deleted!');
+        return redirect('customer')->with('flash_message', 'Customer deleted!');
     }
 }

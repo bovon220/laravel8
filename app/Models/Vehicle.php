@@ -25,7 +25,7 @@ class Vehicle extends Model
      *
      * @var array
      */
-    protected $fillable = ['no', 'type', 'issue_date', 'expire_date', 'name', 'birth_date', 'id_no', 'user_id'];
+    protected $fillable = ['Brand','Serie','Color','mileage', 'id_no', 'user_id'];
 
     public function user()
     {
